@@ -48,4 +48,3 @@ export class TenantPrismaService extends TenantPrismaClient implements OnModuleI
   }
 }
 
-export const TENANT_PRISMA_SERVICE = TenantPrismaService.name;
