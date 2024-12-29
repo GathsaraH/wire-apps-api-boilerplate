@@ -4,8 +4,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 // swagger
 export const buildSwagger = (app) => {
   const config = new DocumentBuilder()
-    .setTitle('E-Commerce API')
-    .setDescription('This is the API for E-Commerce')
+    .setTitle('WireApps API')
+    .setDescription('This is the API for the WireApps API')
     .setVersion('1.0')
     .addTag('LMS')
     .addBearerAuth({

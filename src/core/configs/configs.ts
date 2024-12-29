@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
-export const applicationConfig = {
+export const applicationConfigs = {
   port: parseInt(process.env[`APP_PORT`], 10) || 3003,
   nodeEnv: process.env[`NODE_ENV`],
   appName: process.env[`APP_NAME`],
