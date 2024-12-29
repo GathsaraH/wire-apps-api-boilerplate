@@ -1,7 +1,16 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import 'dotenv/config';
+import {
+  ClassSerializerInterceptor,
+  Logger,
+  ValidationPipe,
+  VersioningType,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { NestFactory, Reflector } from '@nestjs/core';
+import { useContainer } from 'class-validator';
+import { AppModule } from './app.module';
+import validationOptions from './utils/validation-options';
+import { ResolvePromisesInterceptor } from './utils/serializer.interceptor';
 import { setupSwagger } from './core/configs/swagger/swagger';
 
 async function bootstrap() {
@@ -9,18 +18,28 @@ async function bootstrap() {
     cors: true,
     logger: ['error', 'warn', 'log', 'debug'],
   });
-  app.setGlobalPrefix(process.env.API_PREFIX, {
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+  const configService = app.get(ConfigService);
+  const logger = new Logger('Bootstrap');
+
+  app.enableShutdownHooks();
+  app.setGlobalPrefix(configService.getOrThrow('app.apiPrefix'), {
     exclude: ['/'],
   });
-  app.useGlobalPipes(new ValidationPipe());
-  const configService = app.get(ConfigService);
-  //cors configuration
-  app.enableCors();
-  // Setup Swagger
-  setupSwagger(app);
-
-  await app.listen(configService.get('app.port') || 5601, () => {
-    console.log(`Server running at port: ${configService.get('app.port')}`);
+  app.enableVersioning({
+    type: VersioningType.URI,
   });
+  app.useGlobalPipes(new ValidationPipe(validationOptions));
+  app.useGlobalInterceptors(
+    new ResolvePromisesInterceptor(),
+    new ClassSerializerInterceptor(app.get(Reflector)),
+  );
+
+  setupSwagger(app);
+  await app.listen(configService.getOrThrow('app.port'), () =>
+    logger.debug(
+      `Server is running on ${configService.getOrThrow('app.port')}`,
+    ),
+  );
 }
-bootstrap();
+void bootstrap();

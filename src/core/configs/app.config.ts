@@ -1,24 +1,69 @@
 import { registerAs } from '@nestjs/config';
-import { applicationConfigs } from './configs';
+import {
+  IsEnum,
+  IsInt,
+  IsOptional,
+  IsString,
+  IsUrl,
+  Max,
+  Min,
+} from 'class-validator';
+import validateConfig from 'src/utils/validate-config';
 
-export default registerAs('app', () => ({
-  // General Config
-  nodeEnv: applicationConfigs.nodeEnv,
-  name: applicationConfigs.appName,
-  port: applicationConfigs.port,
-  apiPrefix: applicationConfigs.apiPrefix,
-  fallbackLanguage: applicationConfigs.appFallBackLanguage,
-  frontendUrl: applicationConfigs.frontendUrl,
-  // Database Config
-  database: {
-    host: applicationConfigs.database.host,
-    url: applicationConfigs.database.url,
-  },
-  // Mail Config
-  mail: {
-    host: applicationConfigs.mail.host,
-    port: applicationConfigs.mail.port,
-    email: applicationConfigs.mail.email,
-    password: applicationConfigs.mail.password,
-  },
-}));
+enum Environment {
+  Development = 'development',
+  Production = 'production',
+  Test = 'test',
+}
+
+class EnvironmentVariablesValidator {
+  @IsEnum(Environment)
+  @IsOptional()
+  NODE_ENV: Environment;
+
+  @IsInt()
+  @Min(0)
+  @Max(65535)
+  @IsOptional()
+  APP_PORT: number;
+
+  @IsUrl({ require_tld: false })
+  @IsOptional()
+  FRONTEND_DOMAIN: string;
+
+  @IsUrl({ require_tld: false })
+  @IsOptional()
+  BACKEND_DOMAIN: string;
+
+  @IsString()
+  @IsOptional()
+  API_PREFIX: string;
+
+  @IsString()
+  @IsOptional()
+  APP_FALLBACK_LANGUAGE: string;
+
+  @IsString()
+  @IsOptional()
+  APP_HEADER_LANGUAGE: string;
+}
+
+export default registerAs('app', () => {
+  validateConfig(process.env, EnvironmentVariablesValidator);
+
+  return {
+    nodeEnv: process.env.NODE_ENV || 'development',
+    name: process.env.APP_NAME || 'app',
+    workingDirectory: process.env.PWD || process.cwd(),
+    frontendDomain: process.env.FRONTEND_DOMAIN,
+    backendDomain: process.env.BACKEND_DOMAIN ?? 'http://localhost',
+    port: process.env.APP_PORT
+      ? parseInt(process.env.APP_PORT, 10)
+      : process.env.PORT
+        ? parseInt(process.env.PORT, 10)
+        : 5601,
+    apiPrefix: process.env.API_PREFIX || 'api',
+    fallbackLanguage: process.env.APP_FALLBACK_LANGUAGE || 'en',
+    headerLanguage: process.env.APP_HEADER_LANGUAGE || 'x-custom-lang',
+  };
+});
