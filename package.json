@@ -6,7 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "pnpm install && pnpm run postinstall && nest build",
+    "build:tenant": "pnpm install && pnpm run postinstall && nest build",
+    "build:public": "pnpm install && pnpm run migrate:deploy && pnpm run generate && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch -b swc --type-check",
@@ -22,7 +23,10 @@
     "db:push:tenant": "prisma db push --schema prisma/tenant-schema.prisma",
     "db:generate:public": "prisma generate --schema prisma/public-schema.prisma",
     "db:push:public": "prisma db push --schema prisma/public-schema.prisma",
-    "postinstall": "pnpm db:generate:tenant && pnpm db:generate:public"
+    "postinstall": "pnpm db:generate:tenant && pnpm db:generate:public",
+    "migrate:dev": "prisma migrate dev --name init",
+    "migrate:deploy": "prisma migrate deploy",
+    "generate": "prisma generate"
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^5.1.4",

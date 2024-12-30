@@ -10,6 +10,10 @@ export class SerialLoggerService implements LoggerService {
     this.logger.info(message);
   }
 
+  debug(message: any, ...optionalParams: any[]) {
+    this.logger.debug(message, ...optionalParams);
+  }
+  
   error(message: string, trace: string) {
     this.logger.error({ message, trace });
   }

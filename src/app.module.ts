@@ -10,9 +10,10 @@ import { TransformResponseInterceptor } from '@common/interceptors/transform-res
 import { AuthMiddleware } from './common/middlewares/auth.middleware';
 import { AuthModule } from './modules/auth/auth.module';
 import { SerialLoggerModule } from './core/logging/serial-logger.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
-  imports: [AppConfigModule, TerminusModule, SerialLoggerModule, AuthModule],
+  imports: [AppConfigModule, TerminusModule, SerialLoggerModule, AuthModule,UserModule],
   controllers: [AppController],
   providers: [
     AppService,
