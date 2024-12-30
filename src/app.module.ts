@@ -8,9 +8,11 @@ import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
 import { ResponseLoggingInterceptor } from '@common/interceptors/response-logging.interceptor';
 import { TransformResponseInterceptor } from '@common/interceptors/transform-response.interceptor';
 import { AuthMiddleware } from './common/middlewares/auth.middleware';
+import { AuthModule } from './modules/auth/auth.module';
+import { SerialLoggerModule } from './core/logging/serial-logger.module';
 
 @Module({
-  imports: [AppConfigModule, TerminusModule],
+  imports: [AppConfigModule, TerminusModule, SerialLoggerModule, AuthModule],
   controllers: [AppController],
   providers: [
     AppService,
@@ -28,8 +30,10 @@ import { AuthMiddleware } from './common/middlewares/auth.middleware';
     },
   ],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('*');
-  }
-}
+export class AppModule {}
+
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     consumer.apply(AuthMiddleware).forRoutes('*');
+//   }
+// }

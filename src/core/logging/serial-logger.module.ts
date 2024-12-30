@@ -5,4 +5,4 @@ import { SerialLoggerService } from './seri-logger.service';
   providers: [SerialLoggerService],
   exports: [SerialLoggerService],
 })
-export class SeriLoggerModule {}
+export class SerialLoggerModule {}
