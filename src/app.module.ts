@@ -11,6 +11,7 @@ import { SerialLoggerModule } from './core/logging/serial-logger.module';
 import { UserModule } from './modules/user/user.module';
 import { UuidInterceptor } from './common/interceptors/uuid.interceptor';
 import { ClerkModule } from './modules/auth/clerk/clerk.module';
+import { FilesModule } from './modules/files/files.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { ClerkModule } from './modules/auth/clerk/clerk.module';
     TerminusModule,
     SerialLoggerModule,
     UserModule,
-    ClerkModule
+    ClerkModule,
+    FilesModule
   ],
   controllers: [AppController],
   providers: [
