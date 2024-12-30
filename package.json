@@ -25,6 +25,7 @@
     "postinstall": "pnpm db:generate:tenant && pnpm db:generate:public"
   },
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.1.4",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.3.0",
     "@nestjs/core": "^10.0.0",

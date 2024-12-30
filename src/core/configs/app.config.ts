@@ -1,7 +1,9 @@
+import { AuthProviderEnum } from '@/common/constants/auth-providers';
 import { registerAs } from '@nestjs/config';
 import {
   IsEnum,
   IsInt,
+  IsNotEmpty,
   IsOptional,
   IsString,
   IsUrl,
@@ -46,6 +48,18 @@ class EnvironmentVariablesValidator {
   @IsString()
   @IsOptional()
   APP_HEADER_LANGUAGE: string;
+
+  @IsString()
+  @IsOptional()
+  CLERK_SECRET_KEY: string;
+
+  @IsString()
+  @IsOptional()
+  CLERK_PUBLISHABLE_KEY: string;
+
+  @IsEnum(AuthProviderEnum)
+  @IsNotEmpty()
+  AUTH_SERVICE: AuthProviderEnum;
 }
 
 export default registerAs('app', () => {
@@ -65,5 +79,8 @@ export default registerAs('app', () => {
     apiPrefix: process.env.API_PREFIX || 'api',
     fallbackLanguage: process.env.APP_FALLBACK_LANGUAGE || 'en',
     headerLanguage: process.env.APP_HEADER_LANGUAGE || 'x-custom-lang',
+    clerkSecretKey: process.env.CLERK_SECRET_KEY,
+    clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+    authService: process.env.AUTH_SERVICE as AuthProviderEnum,
   };
 });
