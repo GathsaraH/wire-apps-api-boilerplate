@@ -16,7 +16,7 @@ export class ClerkService {
     private readonly logger: SerialLoggerService,
   ) {
     this.clerkClient = createClerkClient({
-      secretKey: this.configService.get('app.clerkSecretKey'),
+      secretKey: this.configService.get('clerk.clerkSecretKey'),
     });
   }
 

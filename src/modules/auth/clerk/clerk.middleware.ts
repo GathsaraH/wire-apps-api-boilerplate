@@ -11,7 +11,7 @@ import { createClerkClient } from '@clerk/clerk-sdk-node';
 export class ClerkMiddleware implements NestMiddleware {
   constructor(private readonly configService: ConfigService) {}
   private clerkClient = createClerkClient({
-    secretKey: this.configService.get('app.clerkSecretKey'),
+    secretKey: this.configService.get('clerk.clerkSecretKey'),
   });
 
   async use(req: Request, res: Response, next: NextFunction) {
