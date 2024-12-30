@@ -8,7 +8,8 @@ import {
 import { REQUEST } from '@nestjs/core';
 import { PublicPrismaService } from './public-prisma.service';
 import { TenantPrismaService } from './tenant-prisma.service';
-import { IRequestWithProps } from 'src/common/types/request-with-props';
+import { IRequestWithProps } from '@/common/types/request-with-props';
+
 
 @Global()
 @Module({
