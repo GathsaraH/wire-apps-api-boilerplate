@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import { ClerkMiddleware } from './clerk.middleware';
+import { ClerkMiddleware } from '../../modules/auth/clerk/clerk.middleware';
 import { ConfigService } from '@nestjs/config';
 import { AuthProviderEnum } from '../constants/auth-providers';
 

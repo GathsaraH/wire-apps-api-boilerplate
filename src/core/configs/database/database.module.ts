@@ -9,12 +9,18 @@ import { REQUEST } from '@nestjs/core';
 import { PublicPrismaService } from './public-prisma.service';
 import { TenantPrismaService } from './tenant-prisma.service';
 import { IRequestWithProps } from '@/common/types/request-with-props';
+import { PrimaryPrismaService } from './primary-prisma.service';
 
 
 @Global()
 @Module({
-  exports: [PublicPrismaService, TenantPrismaService],
+  exports: [PublicPrismaService, TenantPrismaService,PrimaryPrismaService],
   providers: [
+    {
+      provide: PrimaryPrismaService,
+      scope: Scope.DEFAULT,
+      useClass: PrimaryPrismaService
+    },
     {
       provide: PublicPrismaService,
       scope: Scope.DEFAULT,
@@ -42,4 +48,4 @@ import { IRequestWithProps } from '@/common/types/request-with-props';
     },
   ],
 })
-export class DatabaseConfig {}
+export class DatabaseModule {}

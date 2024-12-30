@@ -7,19 +7,18 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
 import { ResponseLoggingInterceptor } from '@common/interceptors/response-logging.interceptor';
 import { TransformResponseInterceptor } from '@common/interceptors/transform-response.interceptor';
-import { AuthMiddleware } from './common/middlewares/auth.middleware';
-import { AuthModule } from './modules/auth/auth.module';
 import { SerialLoggerModule } from './core/logging/serial-logger.module';
 import { UserModule } from './modules/user/user.module';
 import { UuidInterceptor } from './common/interceptors/uuid.interceptor';
+import { ClerkModule } from './modules/auth/clerk/clerk.module';
 
 @Module({
   imports: [
     AppConfigModule,
     TerminusModule,
     SerialLoggerModule,
-    AuthModule,
     UserModule,
+    ClerkModule
   ],
   controllers: [AppController],
   providers: [

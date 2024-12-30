@@ -5,6 +5,7 @@ CREATE TABLE "User" (
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "email" TEXT NOT NULL,
     "name" TEXT,
+    "clerkUserId" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
