@@ -15,6 +15,7 @@ export class ResponseLoggingInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
     const start = Date.now();
+    const requestId = request.headers['x-request-id'];
 
     return next.handle().pipe(
       tap(() => {
@@ -25,10 +26,10 @@ export class ResponseLoggingInterceptor implements NestInterceptor {
           bodyString = JSON.stringify(body);
         } catch (error) {
           bodyString = 'Could not stringify body';
-          this.logger.error('Error  request body', error);
+          this.logger.error(`Request ID: ${requestId} - Error stringifying request body`, error);
         }
         this.logger.log(
-          `${method} ${url} - ${duration}ms - Body: ${bodyString}`,
+          `Request ID: ${requestId} - ${method} ${url} - ${duration}ms - Body: ${bodyString}`,
         );
       }),
     );

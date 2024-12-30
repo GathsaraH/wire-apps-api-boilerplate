@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user-dto';
 import { LoginUserDto } from './dto/login-user-dto';
 
+
 @ApiTags('User Module')
 @Controller('users')
 export class UserController {
@@ -14,11 +15,11 @@ export class UserController {
   @ApiResponse({
     status: 201,
     description: 'The user has been successfully created.',
-    //type: any,
+    type: CreateUserDto,
   })
   @ApiResponse({ status: 400, description: 'Bad Request.' })
-  async register(@Body() createUserDto: CreateUserDto): Promise<any> {
-    return this.userService.register(createUserDto);
+  async userRegister(@Body() createUserDto: CreateUserDto) {
+    return this.userService.userRegister(createUserDto);
   }
 
   @Post('login')

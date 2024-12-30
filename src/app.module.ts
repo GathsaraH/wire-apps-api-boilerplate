@@ -11,15 +11,26 @@ import { AuthMiddleware } from './common/middlewares/auth.middleware';
 import { AuthModule } from './modules/auth/auth.module';
 import { SerialLoggerModule } from './core/logging/serial-logger.module';
 import { UserModule } from './modules/user/user.module';
+import { UuidInterceptor } from './common/interceptors/uuid.interceptor';
 
 @Module({
-  imports: [AppConfigModule, TerminusModule, SerialLoggerModule, AuthModule,UserModule],
+  imports: [
+    AppConfigModule,
+    TerminusModule,
+    SerialLoggerModule,
+    AuthModule,
+    UserModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: UuidInterceptor,
     },
     {
       provide: APP_INTERCEPTOR,
