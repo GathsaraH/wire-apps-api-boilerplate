@@ -32,3 +32,12 @@ model Datasource {
   // Their data will be segragated using "tenantId" column in each table.
   // This is handled using an extendion query on the Prisma client.
 }
+
+model Customer {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  firstName String
+  lastName  String
+  email     String
+}
