@@ -8,8 +8,6 @@ import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { randomStringGenerator } from '@nestjs/common/utils/random-string-generator.util';
 import { ConfigService } from '@nestjs/config';
-import { FileType } from '@/common/types/file';
-import { FileUpdateResponseDto } from '../dto/file-upload-response.dto';
 import { FileUploadDto } from '../dto/file.dto';
 
 @Injectable()

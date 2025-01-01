@@ -17,7 +17,7 @@ export class AuthMiddleware implements NestMiddleware {
 
   async use(req: Request, res: Response, next: NextFunction) {
     const authService: AuthProviderEnum =
-      this.configService.get('app.authService');
+      this.configService.get('app.authService',{ infer: true });
 
     switch (authService) {
       case AuthProviderEnum.CLERK:

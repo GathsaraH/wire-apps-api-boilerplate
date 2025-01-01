@@ -23,7 +23,7 @@ async function bootstrap() {
   const logger = new Logger('Bootstrap');
 
   app.enableShutdownHooks();
-  app.setGlobalPrefix(configService.getOrThrow('app.apiPrefix'), {
+  app.setGlobalPrefix(configService.getOrThrow<string>('app.apiPrefix', { infer: true }), {
     exclude: ['/'],
   });
   app.enableVersioning({
@@ -36,9 +36,9 @@ async function bootstrap() {
   );
 
   setupSwagger(app);
-  await app.listen(configService.getOrThrow('app.port'), () =>
+  await app.listen(configService.getOrThrow<number>('app.port', { infer: true }), () =>
     logger.debug(
-      `Server is running on ${configService.getOrThrow('app.port')}`,
+      `Server is running on ${configService.getOrThrow<number>('app.port', { infer: true })}`,
     ),
   );
 }

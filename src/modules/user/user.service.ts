@@ -1,14 +1,10 @@
 import {
   HttpException,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user-dto';
-import { LoginUserDto } from './dto/login-user-dto';
 import { SerialLoggerService } from '@/core/logging/seri-logger.service';
-import { ApiResponse } from '@/common/response/api-response';
 import { User } from '@prisma/client';
-import { PublicPrismaService } from '@/core/configs/database/public-prisma.service';
 import { PrimaryPrismaService } from '@/core/configs/database/primary-prisma.service';
 import { ClerkService } from '../auth/clerk/clerk.service';
 
@@ -52,5 +48,5 @@ export class UserService {
     }
   }
 
-  async login(loginUserDto: LoginUserDto): Promise<any> {}
+  async login(): Promise<any> {}
 }

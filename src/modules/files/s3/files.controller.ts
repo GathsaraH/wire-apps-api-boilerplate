@@ -2,11 +2,10 @@ import {
   Controller,
   Post,
   UploadedFile,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import {  ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
 import { FilesS3Service } from './files.service';
 import { FileUpdateResponseDto } from '../dto/file-upload-response.dto';

@@ -1,9 +1,7 @@
-import { AuthProviderEnum } from '@/common/constants/auth-providers';
 import { registerAs } from '@nestjs/config';
 import {
   IsEnum,
   IsInt,
-  IsNotEmpty,
   IsOptional,
   IsString,
   IsUrl,

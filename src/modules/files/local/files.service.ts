@@ -9,7 +9,7 @@ import { ConfigService } from '@nestjs/config';
 export class FilesLocalService {
   constructor(private readonly configService: ConfigService) {}
 
-  async create(file: Express.Multer.File) {
+   create(file: Express.Multer.File) {
     if (!file) {
       throw new UnprocessableEntityException({
         status: HttpStatus.UNPROCESSABLE_ENTITY,

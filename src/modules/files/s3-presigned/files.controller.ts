@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import {  ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { FilesS3PresignedService } from './files.service';
 import { FileUploadDto } from '../dto/file.dto';
 import { FileUpdateResponseDto } from '../dto/file-upload-response.dto';
