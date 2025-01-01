@@ -28,7 +28,8 @@
     "postinstall": "pnpm db:generate:tenant && pnpm db:generate:public",
     "migrate:dev": "prisma migrate dev --name init",
     "migrate:deploy": "prisma migrate deploy",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@aws-sdk/s3-request-presigner": "^3.717.0",
@@ -70,7 +71,9 @@
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.0",
     "jest": "^29.5.0",
+    "lint-staged": "^15.3.0",
     "multer-s3": "^3.0.1",
     "prettier": "^3.0.0",
     "prisma": "^6.1.0",

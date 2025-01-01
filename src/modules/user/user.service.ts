@@ -39,9 +39,10 @@ export class UserService {
     }
   }
 
-  async login(loginUserDto: LoginUserDto): Promise<any> {
-    return {
-      loginUserDto,
-    };
+  login(loginUserDto: LoginUserDto): Promise<any> {
+    return Promise.resolve({
+      message: "Login successful",
+      user: loginUserDto,
+    });
   }
 }
