@@ -1,4 +1,4 @@
-import { AuthProviderEnum } from '@/common/constants/auth-providers';
+import { AuthProviderEnum } from "@/common/constants/auth-providers";
 
 export type ClerkConfig = {
   clerkSecretKey: string;

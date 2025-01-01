@@ -1,20 +1,16 @@
-import {
-  HttpStatus,
-  Injectable,
-  UnprocessableEntityException,
-} from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { HttpStatus, Injectable, UnprocessableEntityException } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class FilesLocalService {
   constructor(private readonly configService: ConfigService) {}
 
-   create(file: Express.Multer.File) {
+  create(file: Express.Multer.File) {
     if (!file) {
       throw new UnprocessableEntityException({
         status: HttpStatus.UNPROCESSABLE_ENTITY,
         errors: {
-          file: 'selectFile',
+          file: "selectFile",
         },
       });
     }

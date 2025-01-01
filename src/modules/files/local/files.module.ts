@@ -1,15 +1,11 @@
-import {
-  HttpStatus,
-  Module,
-  UnprocessableEntityException,
-} from '@nestjs/common';
-import { FilesLocalController } from './files.controller';
-import { MulterModule } from '@nestjs/platform-express';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { diskStorage } from 'multer';
-import { randomStringGenerator } from '@nestjs/common/utils/random-string-generator.util';
+import { HttpStatus, Module, UnprocessableEntityException } from "@nestjs/common";
+import { FilesLocalController } from "./files.controller";
+import { MulterModule } from "@nestjs/platform-express";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { diskStorage } from "multer";
+import { randomStringGenerator } from "@nestjs/common/utils/random-string-generator.util";
 
-import { FilesLocalService } from './files.service';
+import { FilesLocalService } from "./files.service";
 
 @Module({
   imports: [
@@ -34,19 +30,13 @@ import { FilesLocalService } from './files.service';
             callback(null, true);
           },
           storage: diskStorage({
-            destination: './files',
+            destination: "./files",
             filename: (request, file, callback) => {
-              callback(
-                null,
-                `${randomStringGenerator()}.${file.originalname
-                  .split('.')
-                  .pop()
-                  ?.toLowerCase()}`,
-              );
+              callback(null, `${randomStringGenerator()}.${file.originalname.split(".").pop()?.toLowerCase()}`);
             },
           }),
           limits: {
-            fileSize: configService.get('file.maxFileSize', { infer: true }),
+            fileSize: configService.get("file.maxFileSize", { infer: true }),
           },
         };
       },

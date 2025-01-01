@@ -1,5 +1,5 @@
-import { SetMetadata } from '@nestjs/common';
+import { SetMetadata } from "@nestjs/common";
 
 export const CommandHandler = (commandName: string): ClassDecorator => {
-  return SetMetadata('commandName', commandName);
+  return SetMetadata("commandName", commandName);
 };

@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { HealthCheckService, PrismaHealthIndicator } from '@nestjs/terminus';
-import { PrismaClient } from '@prisma/client';
+import { Injectable } from "@nestjs/common";
+import { HealthCheckService, PrismaHealthIndicator } from "@nestjs/terminus";
+import { PrismaClient } from "@prisma/client";
 
 @Injectable()
 export class AppService {
@@ -14,8 +14,6 @@ export class AppService {
   }
 
   healthCheck() {
-    return this.health.check([
-      () => this.db.pingCheck('database', this.prismaClient),
-    ]);
+    return this.health.check([() => this.db.pingCheck("database", this.prismaClient)]);
   }
 }

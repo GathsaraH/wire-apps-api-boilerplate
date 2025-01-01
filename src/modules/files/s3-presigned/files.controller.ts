@@ -1,12 +1,12 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import {  ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { FilesS3PresignedService } from './files.service';
-import { FileUploadDto } from '../dto/file.dto';
-import { FileUpdateResponseDto } from '../dto/file-upload-response.dto';
+import { Body, Controller, Post } from "@nestjs/common";
+import { ApiCreatedResponse, ApiTags } from "@nestjs/swagger";
+import { FilesS3PresignedService } from "./files.service";
+import { FileUploadDto } from "../dto/file.dto";
+import { FileUpdateResponseDto } from "../dto/file-upload-response.dto";
 
-@ApiTags('Files')
+@ApiTags("Files")
 @Controller({
-  path: 'files',
+  path: "files",
 })
 export class FilesS3PresignedController {
   constructor(private readonly filesService: FilesS3PresignedService) {}
@@ -14,7 +14,7 @@ export class FilesS3PresignedController {
   @ApiCreatedResponse({
     type: FileUpdateResponseDto,
   })
-  @Post('upload')
+  @Post("upload")
   async uploadFile(@Body() file: FileUploadDto) {
     return this.filesService.create(file);
   }

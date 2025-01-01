@@ -1,33 +1,27 @@
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import {
-  PrismaClient as TenantPrismaClient,
-  Prisma,
-} from '@prisma-tenant/prisma/client';
+import { Injectable, Logger, OnModuleInit } from "@nestjs/common";
+import { PrismaClient as TenantPrismaClient, Prisma } from "@prisma-tenant/prisma/client";
 
 @Injectable()
-export class TenantPrismaService
-  extends TenantPrismaClient
-  implements OnModuleInit
-{
+export class TenantPrismaService extends TenantPrismaClient implements OnModuleInit {
   constructor(datasourceUrl: string) {
     super({
       datasourceUrl,
       log: [
         {
-          emit: 'event',
-          level: 'query',
+          emit: "event",
+          level: "query",
         },
         {
-          emit: 'event',
-          level: 'error',
+          emit: "event",
+          level: "error",
         },
         {
-          emit: 'event',
-          level: 'info',
+          emit: "event",
+          level: "info",
         },
         {
-          emit: 'event',
-          level: 'warn',
+          emit: "event",
+          level: "warn",
         },
       ],
     });
@@ -44,10 +38,10 @@ export class TenantPrismaService
   }
 
   async onModuleInit() {
-    this.$on('query' as never, (e: Prisma.QueryEvent) => {
-      Logger.debug('Query: ' + e.query);
-      Logger.debug('Params: ' + e.params);
-      Logger.debug('Duration: ' + e.duration + 'ms');
+    this.$on("query" as never, (e: Prisma.QueryEvent) => {
+      Logger.debug("Query: " + e.query);
+      Logger.debug("Params: " + e.params);
+      Logger.debug("Duration: " + e.duration + "ms");
     });
 
     await this.$connect();

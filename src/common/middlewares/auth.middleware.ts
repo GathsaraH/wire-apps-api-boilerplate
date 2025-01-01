@@ -1,12 +1,8 @@
-import {
-  Injectable,
-  NestMiddleware,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { NextFunction, Request, Response } from 'express';
-import { ClerkMiddleware } from '../../modules/auth/clerk/clerk.middleware';
-import { ConfigService } from '@nestjs/config';
-import { AuthProviderEnum } from '../constants/auth-providers';
+import { Injectable, NestMiddleware, UnauthorizedException } from "@nestjs/common";
+import { NextFunction, Request, Response } from "express";
+import { ClerkMiddleware } from "../../modules/auth/clerk/clerk.middleware";
+import { ConfigService } from "@nestjs/config";
+import { AuthProviderEnum } from "../constants/auth-providers";
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
@@ -16,8 +12,7 @@ export class AuthMiddleware implements NestMiddleware {
   ) {}
 
   async use(req: Request, res: Response, next: NextFunction) {
-    const authService: AuthProviderEnum =
-      this.configService.get('app.authService',{ infer: true });
+    const authService: AuthProviderEnum = this.configService.get("app.authService", { infer: true });
 
     switch (authService) {
       case AuthProviderEnum.CLERK:
@@ -26,7 +21,7 @@ export class AuthMiddleware implements NestMiddleware {
         next();
         break;
       default:
-        throw new UnauthorizedException('Unsupported authentication service');
+        throw new UnauthorizedException("Unsupported authentication service");
     }
   }
 }

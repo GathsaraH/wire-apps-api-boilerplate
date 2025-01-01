@@ -1,15 +1,9 @@
-import {
-  BadRequestException,
-  Global,
-  Module,
-  NotFoundException,
-  Scope,
-} from '@nestjs/common';
-import { REQUEST } from '@nestjs/core';
-import { PublicPrismaService } from './public-prisma.service';
-import { TenantPrismaService } from './tenant-prisma.service';
-import { IRequestWithProps } from '@/common/types/request-with-props';
-import { PrimaryPrismaService } from './primary-prisma.service';
+import { BadRequestException, Global, Module, NotFoundException, Scope } from "@nestjs/common";
+import { REQUEST } from "@nestjs/core";
+import { PublicPrismaService } from "./public-prisma.service";
+import { TenantPrismaService } from "./tenant-prisma.service";
+import { IRequestWithProps } from "@/common/types/request-with-props";
+import { PrimaryPrismaService } from "./primary-prisma.service";
 
 @Global()
 @Module({
@@ -32,17 +26,15 @@ import { PrimaryPrismaService } from './primary-prisma.service';
       useFactory: (request: IRequestWithProps) => {
         const { tenant } = request;
 
-        if (!tenant) throw new BadRequestException('Invalid tenant code.');
+        if (!tenant) throw new BadRequestException("Invalid tenant code.");
 
         const { tenantCode, datasourceUrl } = tenant;
 
         if (datasourceUrl) {
-          throw new NotFoundException('This tenant has no datasource.');
+          throw new NotFoundException("This tenant has no datasource.");
         }
 
-        return new TenantPrismaService(datasourceUrl).withQueryExtensions(
-          tenantCode,
-        );
+        return new TenantPrismaService(datasourceUrl).withQueryExtensions(tenantCode);
       },
     },
   ],

@@ -1,4 +1,4 @@
-import { Injectable, Type } from '@nestjs/common';
+import { Injectable, Type } from "@nestjs/common";
 
 @Injectable()
 export class CommandBus {
@@ -7,9 +7,7 @@ export class CommandBus {
   execute(command: any): any {
     const handler = this.handlers.get(command.constructor.name);
     if (!handler) {
-      throw new Error(
-        `No handler found for command: ${command.constructor.name}`,
-      );
+      throw new Error(`No handler found for command: ${command.constructor.name}`);
     }
     return handler.handle(command);
   }
@@ -19,6 +17,6 @@ export class CommandBus {
   }
 
   private getHandler(command: any): Type<any> {
-    return Reflect.getMetadata('commandHandler', command.constructor);
+    return Reflect.getMetadata("commandHandler", command.constructor);
   }
 }

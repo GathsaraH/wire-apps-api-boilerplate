@@ -1,7 +1,7 @@
 export const PinoConfig = {
-  level: 'info',
+  level: "info",
   transport: {
-    target: 'pino-pretty',
+    target: "pino-pretty",
     options: {
       colorize: true,
     },

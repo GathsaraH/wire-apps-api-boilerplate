@@ -1,5 +1,5 @@
 // query-bus.ts
-import { Injectable, Type } from '@nestjs/common';
+import { Injectable, Type } from "@nestjs/common";
 
 @Injectable()
 export class QueryBus {
@@ -17,6 +17,6 @@ export class QueryBus {
     this.handlers.set(queryName, handler);
   }
   private getHandler(query: any): Type<any> {
-    return Reflect.getMetadata('queryHandler', query.constructor);
+    return Reflect.getMetadata("queryHandler", query.constructor);
   }
 }

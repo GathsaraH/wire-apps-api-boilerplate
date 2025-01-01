@@ -1,12 +1,9 @@
-import {
-  HttpException,
-  Injectable,
-} from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user-dto';
-import { SerialLoggerService } from '@/core/logging/seri-logger.service';
-import { User } from '@prisma/client';
-import { PrimaryPrismaService } from '@/core/configs/database/primary-prisma.service';
-import { ClerkService } from '../auth/clerk/clerk.service';
+import { HttpException, Injectable } from "@nestjs/common";
+import { CreateUserDto } from "./dto/create-user-dto";
+import { SerialLoggerService } from "@/core/logging/seri-logger.service";
+import { User } from "@prisma/client";
+import { PrimaryPrismaService } from "@/core/configs/database/primary-prisma.service";
+import { ClerkService } from "../auth/clerk/clerk.service";
 
 @Injectable()
 export class UserService {
@@ -17,7 +14,7 @@ export class UserService {
   ) {}
   async userRegister(createUserDto: CreateUserDto): Promise<User> {
     try {
-      this.logger.log('Registering user', { context: createUserDto });
+      this.logger.log("Registering user", { context: createUserDto });
       const user = await this.publicPrisma.user.create({
         data: {
           email: createUserDto.email,
@@ -26,11 +23,7 @@ export class UserService {
         },
       });
       // Create user in Clerk
-      const clerkUser = await this.clerkService.register(
-        createUserDto.email,
-        createUserDto.password,
-        createUserDto.name,
-      );
+      const clerkUser = await this.clerkService.register(createUserDto.email, createUserDto.password, createUserDto.name);
       this.logger.log(`User registered in CLERK`);
       // Update user in Prisma
       return await this.publicPrisma.user.update({
@@ -40,11 +33,8 @@ export class UserService {
         },
       });
     } catch (error) {
-      this.logger.error('Error registering user', error);
-      throw new HttpException(
-        error.message ?? 'Error in userRegister',
-        error.status ?? 500,
-      );
+      this.logger.error("Error registering user", error);
+      throw new HttpException(error.message ?? "Error in userRegister", error.status ?? 500);
     }
   }
 

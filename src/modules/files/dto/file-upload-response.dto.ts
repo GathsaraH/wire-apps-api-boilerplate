@@ -1,5 +1,5 @@
-import { FileType } from '@/common/types/file';
-import { ApiProperty } from '@nestjs/swagger';
+import { FileType } from "@/common/types/file";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class FileUpdateResponseDto {
   @ApiProperty({

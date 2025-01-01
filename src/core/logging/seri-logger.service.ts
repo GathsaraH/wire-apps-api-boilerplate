@@ -1,6 +1,6 @@
-import { Injectable, LoggerService } from '@nestjs/common';
-import pino from 'pino';
-import { PinoConfig } from './pino.config';
+import { Injectable, LoggerService } from "@nestjs/common";
+import pino from "pino";
+import { PinoConfig } from "./pino.config";
 
 @Injectable()
 export class SerialLoggerService implements LoggerService {
