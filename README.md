@@ -32,6 +32,7 @@ Whether you're building a SaaS application or enterprise-level APIs, this boiler
 - **Caching**: Built-in caching mechanisms with extensible strategies.
 - **Logging**: SeriLog and Pino for advanced logging.
 - **Database Management**: Prisma ORM with support for migrations and seeds.
+  - PostgreSQL Supported by default.
 - **API Response Standardization**: Consistent API responses across all endpoints.
 - **Extensible**: Easily integrates with third-party services like Stripe and Redis.
 - **Global Error Handling**: Centralized error handling with custom error codes.
@@ -133,6 +134,8 @@ Whether you're building a SaaS application or enterprise-level APIs, this boiler
 
 If you want to use this boilerplate with multi-tenancy architecture, ensure you use the following commands:
 
+> **Note:** The multi-tenancy setup in this project supports different tenant schemas. Each tenant has its own schema within the same database, providing better data isolation and security.
+
 - **Generate Prisma Client for Tenant Schema:**
   ```bash
   pnpm run db:generate:tenant
@@ -157,6 +160,22 @@ If you want to use this boilerplate with multi-tenancy architecture, ensure you 
   ```
   This pushes the public schema to the database.
 
+  ### User Storage in Multi-Tenant Setup
+
+  In a multi-tenant setup, users are saved in the tenant-specific database schema. Each tenant has its own schema, which includes the `User` model. This ensures that user data is isolated and secure for each tenant.
+
+  Here is a visual representation of the multi-tenant setup:
+
+  ```plaintext
+  +-------------------+       +-------------------+
+  |   Master Schema   |       |   Tenant Schema   |
+  |-------------------|       |-------------------|
+  |                   |       |                   |
+  |  Tenant Metadata  |       |       User        |
+  |                   |       |-------------------|
+  |                   |       |                   |
+  +-------------------+       +-------------------+
+
 ### Default Modular Architecture
 
 If you prefer the default modular architecture without multi-tenancy, you can remove `public-schema.prisma` and `tenant-schema.prisma` files. Use the following commands for Prisma migrations and client generation:
@@ -178,6 +197,11 @@ If you prefer the default modular architecture without multi-tenancy, you can re
   pnpm run generate
   ```
   Generates the Prisma client for the default schema.
+
+---
+### Authentication service
+
+The default authentication service is set to `Clerk`. Users can define any authentication provider inside the `modules/auth` directory and inject it into the main service.
 
 ---
 
