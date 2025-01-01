@@ -22,7 +22,7 @@ export class ClerkMiddleware implements NestMiddleware {
       req["user"] = session.claims;
       next();
     } catch (err) {
-      throw new UnauthorizedException("Invalid token");
+      throw new UnauthorizedException("Invalid token", err);
     }
   }
 }

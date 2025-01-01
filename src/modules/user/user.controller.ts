@@ -30,6 +30,6 @@ export class UserController {
   })
   @ApiResponse({ status: 401, description: "Unauthorized." })
   async login(@Body() loginUserDto: LoginUserDto): Promise<string> {
-    return this.userService.login();
+    return this.userService.login(loginUserDto);
   }
 }
