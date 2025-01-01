@@ -15,9 +15,11 @@ export class FilesS3Service {
       });
     }
 
-    return {
+    return Promise.resolve({
       // Can store key and return it
-      file: {},
-    };
+      file: {
+        data: "file",
+      },
+    });
   }
 }

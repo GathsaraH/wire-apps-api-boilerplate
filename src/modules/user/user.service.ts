@@ -1,4 +1,4 @@
-import { LoginUserDto } from './dto/login-user-dto';
+import { LoginUserDto } from "./dto/login-user-dto";
 import { HttpException, Injectable } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user-dto";
 import { SerialLoggerService } from "@/core/logging/seri-logger.service";
@@ -40,8 +40,8 @@ export class UserService {
   }
 
   async login(loginUserDto: LoginUserDto): Promise<any> {
-    return{
-      loginUserDto
-    }
+    return {
+      loginUserDto,
+    };
   }
 }
