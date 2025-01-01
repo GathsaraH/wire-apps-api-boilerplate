@@ -8,7 +8,7 @@ import fileConfig from './files/file.config';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig,fileConfig],
+      load: [appConfig, fileConfig],
       envFilePath: ['.env'],
     }),
     DatabaseModule,

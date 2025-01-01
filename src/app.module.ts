@@ -20,7 +20,7 @@ import { FilesModule } from './modules/files/files.module';
     SerialLoggerModule,
     UserModule,
     ClerkModule,
-    FilesModule
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [

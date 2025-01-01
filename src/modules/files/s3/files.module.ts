@@ -12,7 +12,6 @@ import multerS3 from 'multer-s3';
 
 import { FilesS3Service } from './files.service';
 
-
 @Module({
   imports: [
     MulterModule.registerAsync({

@@ -14,6 +14,8 @@ export class AppService {
   }
 
   healthCheck() {
-    return this.health.check([() => this.db.pingCheck('database', this.prismaClient)]);
+    return this.health.check([
+      () => this.db.pingCheck('database', this.prismaClient),
+    ]);
   }
 }

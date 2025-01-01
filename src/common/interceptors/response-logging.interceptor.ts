@@ -20,7 +20,7 @@ export class ResponseLoggingInterceptor implements NestInterceptor {
 
     // Immediate logging when the request hits the service
     this.logger.log(
-      `Request ID: ${requestId} - ${method} ${url} - Request Body: ${JSON.stringify(body)}`
+      `Request ID: ${requestId} - ${method} ${url} - Request Body: ${JSON.stringify(body)}`,
     );
 
     return next.handle().pipe(
@@ -49,7 +49,9 @@ export class ResponseLoggingInterceptor implements NestInterceptor {
         };
 
         // Log the response after processing
-        this.logger.log(`Request ID: ${requestId} - Response: ${JSON.stringify(logMessage)}`);
+        this.logger.log(
+          `Request ID: ${requestId} - Response: ${JSON.stringify(logMessage)}`,
+        );
 
         return resolvedData;
       }),

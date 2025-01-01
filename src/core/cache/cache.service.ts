@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { CacheStrategy } from './cache-strategy.interface';
 
-
 @Injectable()
 export class CacheService {
   constructor(@Inject('CACHE_STRATEGY') private cacheStrategy: CacheStrategy) {}

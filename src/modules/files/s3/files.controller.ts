@@ -6,16 +6,10 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import {
-  ApiBearerAuth,
-  ApiBody,
-  ApiConsumes,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
 import { FilesS3Service } from './files.service';
 import { FileUpdateResponseDto } from '../dto/file-upload-response.dto';
-
 
 @ApiTags('Files')
 @Controller({
@@ -23,7 +17,6 @@ import { FileUpdateResponseDto } from '../dto/file-upload-response.dto';
 })
 export class FilesS3Controller {
   constructor(private readonly filesService: FilesS3Service) {}
-
 
   @Post('upload')
   @ApiConsumes('multipart/form-data')
@@ -41,7 +34,7 @@ export class FilesS3Controller {
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
     @UploadedFile() file: Express.MulterS3.File,
-  ): Promise<FileUpdateResponseDto>  {
+  ): Promise<FileUpdateResponseDto> {
     return this.filesService.create(file);
   }
 }

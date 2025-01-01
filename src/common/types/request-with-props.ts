@@ -1,4 +1,4 @@
-import { Request } from "express";
+import { Request } from 'express';
 
 export interface IRequestWithProps extends Request {
   auth?: any;

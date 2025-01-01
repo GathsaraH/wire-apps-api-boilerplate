@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Allow } from 'class-validator';
 import { Transform } from 'class-transformer';
 
-
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import fileConfig from '@/core/configs/files/file.config';

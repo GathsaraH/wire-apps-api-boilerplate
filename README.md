@@ -86,7 +86,7 @@ Whether you're building a SaaS application or enterprise-level APIs, this boiler
 │   │       ├── cache.service.ts             // Injectable caching service
 │   │       └── cache-strategy.interface.ts  // Cache strategy abstraction
 │   ├── modules/                             // Application feature modules
-│   │   ├── user/                            // Example: User module
+│   │   ├── user/                            
 │   │   │   ├── dto/
 │   │   │   │   ├── create-user.dto.ts       // DTO: Create user
 │   │   │   │   ├── update-user.dto.ts       // DTO: Update user
@@ -94,13 +94,13 @@ Whether you're building a SaaS application or enterprise-level APIs, this boiler
 │   │   │   ├── user.module.ts               // User module setup
 │   │   │   ├── user.repository.ts           // Data access for User
 │   │   │   └── user.service.ts              // Business logic for User
-│   │   ├── tenant/                          // Example: Tenant module
-│   │   │   ├── dto/
-│   │   │   │   ├── create-tenant.dto.ts     // DTO: Create tenant
-│   │   │   │   ├── update-tenant.dto.ts     // DTO: Update tenant
-│   │   │   ├── tenant.controller.ts         // Tenant-related HTTP routes
-│   │   │   ├── tenant.module.ts             // Tenant module setup
-│   │   │   └── tenant.service.ts            // Business logic for Tenant
+│   │   ├── auth/                            
+│   │   │   ├── clerk/
+│   │   │   │   ├── clerk.service.ts         // Service: Clerk Service
+│   │   │   │   ├── clerk.middleware.ts      // Middleware: Clerk Middleware
+│   │   │   ├── Auth0/                       // Auth0 
+│   │   │   ├── auth0.module.ts             // Tenant module setup
+│   │   │   └── auth0.service.ts            // Business logic for Tenant
 │   │   └──
 │   ├── shared/                              // Shared reusable components
 │   │   ├── cqrs/

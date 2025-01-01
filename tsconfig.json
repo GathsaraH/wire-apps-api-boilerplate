@@ -23,13 +23,8 @@
       "@core/*": ["./src/core/*"],
       "@modules/*": ["./src/modules/*"],
       "@common/*": ["./src/common/*"],
-      // "@filters/*": ["./src/common/filters*"],
-      // "@constants/*": ["./src/common/constants*"],
-      // "@decorators/*": ["./src/common/decorators*"],
-      // "@interceptors/*": ["./src/common/interceptors*"],
-      // "@response/*": ["./src/common/response*"],
-      // "@types/*": ["./src/common/types*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@shared/*": ["./src/shared/*"],
     }
   }
 }

@@ -11,7 +11,6 @@ import { S3Client } from '@aws-sdk/client-s3';
 import multerS3 from 'multer-s3';
 import { FilesS3PresignedService } from './files.service';
 
-
 @Module({
   imports: [
     MulterModule.registerAsync({
